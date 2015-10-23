@@ -1,10 +1,13 @@
 package pojo;
+
+import model.Landscape;
+
 /**
  * entity of puma
  * @author Gaolu
  *
  */
-public class Puma {
+public class PumaPopulation implements Population {
 	//birth rate of pumas
 	private double b = 0.2d;
 	
@@ -64,20 +67,20 @@ public class Puma {
 	}
 
 
-	public Puma() {
+	public PumaPopulation() {
 		super();
 	}
 	
-	public Puma(double b, double m, double l) {
+	public PumaPopulation(double b, double m, double l) {
 		super();
 		this.b = b;
 		this.m = m;
 		this.l = l;
 	}
 
-	public Puma(double[][] densities) {
+	public PumaPopulation(Landscape grid) {
 		super();
-		this.densities = densities;
+		this.densities = grid;
 	}
 
 	public double[][] getDensities() {

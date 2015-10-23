@@ -1,10 +1,14 @@
 package pojo;
+
+import model.Landscape;
+
 /**
  * entity of Hare
  * @author Gaolu
- *
+ * @author jklebes
  */
-public class Hare {
+
+public class HarePopulation implements Population {
 	//birth rate of hares
 	private double r = 0.08d;
 	
@@ -16,75 +20,88 @@ public class Hare {
 	
 	//densities
 	private double[][] densities; 
-    
-	//landScape
-    public int[][] landScpage;
-    
-    //generate fisrt densities for hare
-    public double[][] generateIntDentities(){
-    	//TODO
-    	return null;
-    }
+	private double[][] initDensities;
 	
-	/**
-	 * birth rate of hares
-	 * @return
-	 */
-	public double getR() {
-		return r;
-	}
-	/**
-	 * predation rate at which pumas eat hares
-	 * @return
-	 */
-	public double getA() {
-		return a;
-	}
-	/**
-	 * diffusion rates for hares
-	 * @return
-	 */
-	public double getK() {
-		return k;
+	Landscape grid;
+	int gridwith; //include water halo
+	int gridheight; //, = dimensions of densities array +2
+	
+	//constructor 
+	public HarePopulation(Landscape grid){
+		this.grid=grid;
 	}
 	
+	@Override
+	public void initiatePopulation(Landscape landscape) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void timeStepSquare(int i, int j, double pumadensity) {
+		//update population in square, referencing initDensities array
+		//for densities of neighboring squares
+		
+		// equation goes here 
+		
+		diffuseSquare(i,j);
+	}
+
+	@Override
+	public void timeStepAll(Population pumas) {
+		//save state at beginning of timestep
+		double[][] initDensities = densities;
+		
+		//evolve each square
+		for (int i=1; i < gridwidth-1; i++){
+			for (int j=1; j < gridheight-1; j++){
+				timeStepSquare(i,j, pumas.getDensity(i, j));
+			}
+		}
+	}
+
+	@Override
+	public void diffuseSquare(int i, int j) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void setBirthRate(double r) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void setDeathRate(double a) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void setDiffusionRate(double k) {
+		// TODO Auto-generated method stub
+		
+	}
+
 	
-	
-	/**
-	 * densities
-	 * @return
-	 */
+
+	@Override
+	public double getDensity(int i, int j) {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+	@Override
 	public double[][] getDensities() {
-		return densities;
+		// TODO Auto-generated method stub
+		return null;
 	}
 
-
+	@Override
 	public void setDensities(double[][] densities) {
-		this.densities = densities;
-	}
-	
-	
-	public void setR(double r) {
-		this.r = r;
-	}
-	public void setA(double a) {
-		this.a = a;
-	}
-	public void setK(double k) {
-		this.k = k;
-	}
-	public Hare() {
-		super();
-	}
-	public Hare(double r, double a, double k) {
-		super();
-		this.r = r;
-		this.a = a;
-		this.k = k;
-	}
-	public Hare(double[][] densities) {
-		super();
-		this.densities = densities;
+		// TODO Auto-generated method stub
+		
 	}
 	
 }

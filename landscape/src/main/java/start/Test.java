@@ -6,12 +6,16 @@ import java.util.HashMap;
 
 import javax.swing.filechooser.FileSystemView;
 
+import model.Landscape;
+import model.Model;
 import model.ModelGeneration;
 import model.ModelGenerationImpl;
 import model.ModelHare;
 import model.ModelPuma;
 import pojo.Hare;
+import pojo.HarePopulation;
 import pojo.Puma;
+import pojo.PumaPopulation;
 import until.io.Input;
 import until.io.Output;
 
@@ -24,31 +28,18 @@ public class Test {
 		File dat = new File(path+"property.properties");
 		int[][] landScape = Input.loadFile(dat);
 		
-		//temp 
-		// add file
-		Puma initPuma = new Puma();
-		Hare initHare = new Hare();
+		Landscape grid=new Landscape(landScape);
+		PumaPopulation pumas = new PumaPopulation(grid);
+		HarePopulation hares = new HarePopulation(grid);
 		
-		//put landscape to initObject
-		initPuma.landScape = landScape;
-		initHare.landScpage = landScape;
+		Model model = new Model(hares, pumas);
 		
-		//according to oringal landscape to  create first densities randomly
-		initPuma.setDensities(initPuma.generateIntDentities());
-		initHare.setDensities(initHare.generateIntDentities());
-
-		//use modelObject to simulate puma,hare ,then create a number of status of densities 
-
 		int T = 10;
-		ModelGeneration gene = new ModelGenerationImpl();
-		gene.generateDensities(initPuma, initHare, T);
 		
-		HashMap<Integer, Puma> pumas = gene.getPumas();
-		HashMap<Integer, Hare> hares = gene.getHares();
-		
+		model.evolve(T);
 		
 		//output pictures
-		Output.generateFile(pumas, hares);
+		Output.generateFile(pumas.getDensities(), hares.getDensities());
 		
 	
 	}

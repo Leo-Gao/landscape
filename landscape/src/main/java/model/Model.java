@@ -2,15 +2,28 @@ package model;
 
 import java.util.Map;
 
-import pojo.Puma;
+import pojo.HarePopulation;
+import pojo.PumaPopulation;
 
-public interface ModelPuma {
-	/**
-	 * @param initDentity original densities of hare
-	 * @param T  number of timeStamp
-	 * @return  key:value   which number of timestamp : current puma with densities
-	 */
-	public Map<Integer,Puma> getAll(Puma initPuma,int T);
+public class Model {
 	
+	PumaPopulation pumas;
+	HarePopulation hares;
+	
+	public Model(HarePopulation hares, PumaPopulation pumas){
+		this.hares=hares;
+		this.pumas=pumas;
+	}
+	
+	public void evolve(int t) {
+		for (int i=0; i<t; i++){
+			timestep();
+		}
+	}
+
+	private void timestep() {
+		pumas.timeStepAll(hares);
+		hares.timeStepAll(pumas);
+	}
 	
 }
