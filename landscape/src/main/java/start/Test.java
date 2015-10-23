@@ -1,12 +1,15 @@
 package start;
 
 import java.io.File;
+import java.io.IOException;
 import java.util.HashMap;
 
+import javax.swing.filechooser.FileSystemView;
+
+import model.ModelGeneration;
+import model.ModelGenerationImpl;
 import model.ModelHare;
-import model.ModelHareImpl;
 import model.ModelPuma;
-import model.ModelPumaImpl;
 import pojo.Hare;
 import pojo.Puma;
 import until.io.Input;
@@ -15,10 +18,11 @@ import until.io.Output;
 
 public class Test {
 	
-	public static void main(String[] args) {
+	public static void main(String[] args) throws IOException {
 		//load file  and init landscpae
-		File dat = new File("");
-		int[][] landScape = Input.loadLandscape(dat);
+		String path = Class.class.getResource("/").toString();
+		File dat = new File(path+"property.properties");
+		int[][] landScape = Input.loadFile(dat);
 		
 		//temp 
 		// add file
@@ -34,11 +38,14 @@ public class Test {
 		initHare.setDensities(initHare.generateIntDentities());
 
 		//use modelObject to simulate puma,hare ,then create a number of status of densities 
-		ModelPuma modelPuma = new ModelPumaImpl();
-		ModelHare modelHare = new ModelHareImpl();
+
 		int T = 10;
-		HashMap<Integer, Puma> pumas = (HashMap<Integer, Puma>) modelPuma.getAll(initPuma, T);
-		HashMap<Integer, Hare> hares = (HashMap<Integer, Hare>) modelHare.getAll(initHare, T);
+		ModelGeneration gene = new ModelGenerationImpl();
+		gene.generateDensities(initPuma, initHare, T);
+		
+		HashMap<Integer, Puma> pumas = gene.getPumas();
+		HashMap<Integer, Hare> hares = gene.getHares();
+		
 		
 		//output pictures
 		Output.generateFile(pumas, hares);

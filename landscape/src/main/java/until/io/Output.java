@@ -14,5 +14,7 @@ public class Output {
 	 */
 	public static void generateFile(Map<Integer,Puma> pumas,Map<Integer,Hare> hares){
 		
+		
+		
 	}
 }
