@@ -35,14 +35,15 @@ public class Test {
 		Model model = new Model(hares, pumas);
 		
 		int T = 10;
+		double dt=.01; 
 		
-		model.evolve(T);
+		model.evolve(T, dt);
 		
 		double[][] pumadensity = pumas.getDensities();
 		double[][] haredensity = hares.getDensities();
 		
 		//output pictures
-		Output.generateFile();
+		//Output.generateFile();
 		
 	
 	}

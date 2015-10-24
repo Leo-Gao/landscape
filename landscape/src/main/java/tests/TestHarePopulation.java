@@ -9,10 +9,77 @@ import pojo.HarePopulation;
 
 public class TestHarePopulation {
 
+	
+	Landscape testlandscape = new Landscape(new int[][] {{1,1,1},{1,1,1},{1,1,1}});
+	Landscape testlandscapewithwater = new Landscape(new int[][] {{1,1,1},{1,1,0},{1,0,0}});
+	@Test
+	public void testConstructor1() {
+		HarePopulation hares = new HarePopulation(testlandscape);
+		assertArrayEquals(hares.getDensities(), new double[][] {{0,0,0},{0,0,0},{0,0,0}});
+	}
+	
+	@Test
+	public void testConstructor2() {
+		double density =2;
+		HarePopulation hares = new HarePopulation(testlandscape, density);
+		assertArrayEquals(hares.getDensities(), new double[][] {{2,2,2},{2,2,2},{2,2,2}});
+	}
+	
+	@Test
+	public void testConstructor3() {
+		double[][] densityarray = new double[][] {{2,2,2},{2,2,2},{2,2,2}};
+		HarePopulation hares = new HarePopulation(testlandscape, densityarray);
+		assertArrayEquals(hares.getDensities(), new double[][] {{2,2,2},{2,2,2},{2,2,2}});
+	}
+	
+	@Test
+	public void testDiffuseSquareZeros() {
+		HarePopulation hares = new HarePopulation(testlandscape, 0);
+		assertEquals(hares.diffuseSquare(1, 1, 0, .1),0, .00001);
+	}
+	
+	@Test
+	public void testDiffuseIntoSquare() {
+		HarePopulation hares = new HarePopulation(testlandscape, 5);
+		hares.setDensity(1,1, 0);
+		hares.setDiffusionRate(2);
+		double new_density = hares.diffuseSquare(1, 1, 0, .1);
+		double new_density_expected= .1*2*(4*5 - 4*0);
+		assertEquals(new_density_expected, new_density, .0001);
+	}
+	
+	@Test
+	public void testDiffuseOutOfSquare() {
+		HarePopulation hares = new HarePopulation(testlandscape, 0);
+		hares.setDensity(1,1, 5);
+		hares.setDiffusionRate(.2);
+		double new_density = hares.diffuseSquare(1, 1, 5, .1);
+		double new_density_expected= 5 + .1*.2*(4*0 - 4*5);
+		assertEquals(new_density_expected, new_density, .0001);
+	}
+	
 	@Test
 	public void testDiffuseSquare() {
-		fail("Not yet implemented");
+		double[][] densityarray = new double[][] {{2.1,13,10},{.4,3,17},{3.76,20,.1}};
+		HarePopulation hares = new HarePopulation(testlandscape, densityarray);
+		hares.setDiffusionRate(2);
+		double new_density = hares.diffuseSquare(1, 1, 3, .1);
+		double new_density_expected= .1*2*(13 + .4 + 17 + 20 - 4*3);
+		assertEquals(new_density_expected, new_density, .0001);
 	}
+	
+	@Test
+	public void testDiffuseSquareWater() {
+		double[][] densityarray = new double[][] {{2.1,13,10},{.4,3,17},{3.76,20,.1}};
+		HarePopulation hares = new HarePopulation(testlandscapewithwater, densityarray);
+		hares.setDiffusionRate(2);
+		double new_density = hares.diffuseSquare(1, 1, 3, .1);
+		double new_density_expected= .1*2*(13 + .4 - 2*3);
+		assertEquals(new_density_expected, new_density, .0001);
+	}
+	
+	
+	
 	@Test
 	public void testGetDensities() {
 		fail("Not yet implemented");

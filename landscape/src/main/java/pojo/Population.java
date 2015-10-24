@@ -1,16 +1,11 @@
 package pojo;
 
-import model.Landscape;
-
 /*
  * interface for characteristics and methods of a population
  */
 
 public interface Population {
 
-	
-    //generate first densities of population on landscape
-    public void initiatePopulation(Landscape landscape);
     
     public void timeStepSquare(int i, int j, double dt, double otherpopulationdensity);
     
@@ -30,5 +25,7 @@ public interface Population {
 	
 	public void setDiffusionRate(double k);
 	
+	public void setUniformDensity(double density);
 	
+	public void setDensity(int i, int j, double density);
 }

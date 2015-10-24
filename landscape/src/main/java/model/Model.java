@@ -13,15 +13,20 @@ public class Model {
 		this.pumas=pumas;
 	}
 	
-	public void evolve(int t) {
+	public void evolve(int t, double dt) {
 		for (int i=0; i<t; i++){
-			timestep();
+			timestep(dt);
 		}
 	}
 
-	private void timestep() {
-		pumas.timeStepAll(hares);
-		hares.timeStepAll(pumas);
+	private void timestep(double dt) {
+		//save copy of initial state of hares and pumas
+		HarePopulation hares_init=hares;
+		PumaPopulation pumas_init=pumas;
+		
+		//evolve referencing initial state of other population
+		pumas.timeStepAll(dt, hares_init);
+		hares.timeStepAll(dt, pumas_init);
 	}
 	
 }

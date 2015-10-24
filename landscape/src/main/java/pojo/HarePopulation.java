@@ -9,6 +9,8 @@ import model.Landscape;
  */
 
 public class HarePopulation implements Population {
+	
+	//default values
 	//birth rate of hares
 	private double birthrate = 0.08d;
 	
@@ -29,13 +31,52 @@ public class HarePopulation implements Population {
 	//constructor 
 	public HarePopulation(Landscape grid){
 		this.grid=grid;
+		initiateArrays(grid.getLandWidth(),grid.getLandHeight());
+		setUniformDensity(0);
 	}
 	
-	@Override
-	public void initiatePopulation(Landscape landscape) {
-		// TODO Auto-generated method stub
-		
+
+	public HarePopulation(Landscape grid, double density) {
+		this.grid=grid;
+		initiateArrays(grid.getLandWidth(),grid.getLandHeight());
+		setUniformDensity(density);
 	}
+
+	
+
+	public HarePopulation(Landscape grid, double[][] densityarray) {
+		this.grid=grid;
+		initiateArrays(grid.getLandWidth(),grid.getLandHeight());
+		setDensities(densityarray);
+	}
+
+	private void initiateArrays(int width, int height) {
+		densities = new double[width][height];
+		initDensities = new double[width][height];
+	}
+
+	
+	@Override
+	public void setUniformDensity(double density) {
+		for (int i=0; i < grid.getLandWidth(); i++){
+			for (int j=0; j < grid.getLandHeight(); j++){
+				setDensity(i,j,density);
+			}
+			}
+	}
+
+	@Override
+	public void setDensity(int i, int j, double density) {
+		if (grid.isLand(i,j)){
+			densities[i][j] = density;
+		}
+		else{
+			if (density !=0 ){
+				System.out.println("could not set density at "+i+ ", "+ j+ " to " + density+" , is water");;
+			}
+		}
+	}
+
 
 	@Override
 	public void timeStepSquare(int i, int j, double dt, double pumadensity) {
@@ -52,8 +93,8 @@ public class HarePopulation implements Population {
 		//save state at beginning of timestep
 		this.initDensities = densities;	
 		//evolve each square
-		for (int i=1; i < grid.getWidth(); i++){
-			for (int j=1; j < grid.getHeight(); j++){
+		for (int i=0; i < grid.getLandWidth(); i++){
+			for (int j=0; j < grid.getLandHeight(); j++){
 				 if (grid.isLand(i,j)){
 				timeStepSquare(i,j, dt,pumas.getDensity(i, j));
 				 }
@@ -85,20 +126,17 @@ public class HarePopulation implements Population {
 
 	@Override
 	public void setBirthRate(double r) {
-		// TODO Auto-generated method stub
-		
+		this.birthrate=r;
 	}
 
 	@Override
 	public void setDeathRate(double a) {
-		// TODO Auto-generated method stub
-		
+		this.deathrate=a;
 	}
 
 	@Override
 	public void setDiffusionRate(double k) {
-		// TODO Auto-generated method stub
-		
+		this.diffusionrate=k;
 	}
 
 	
@@ -115,14 +153,17 @@ public class HarePopulation implements Population {
 
 	@Override
 	public double[][] getDensities() {
-		// TODO Auto-generated method stub
-		return null;
+		return this.densities;
 	}
 
 	@Override
 	public void setDensities(double[][] densities) {
-		// TODO Auto-generated method stub
-		
+		//setting each element separately to check if each is on water square
+		for (int i=0; i < grid.getLandWidth(); i++){
+			for (int j=0; j < grid.getLandHeight(); j++){
+				setDensity(i,j,densities[i][j]);
+			}
+		}
 	}
 	
 }
