@@ -20,8 +20,8 @@ public class Test {
 	
 	public static void main(String[] args) throws IOException {
 		//load file  and init landscpae
-		String path = Class.class.getResource("/").toString();
-		File dat = new File(path+"property.properties");
+		String path = System.getProperty("user.dir");
+		File dat = new File(path+File.separatorChar+"property.properties");
 		int[][] landScape = Input.loadFile(dat);
 		
 		//temp 
