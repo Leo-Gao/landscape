@@ -16,8 +16,6 @@ public class Output {
 	 * @param hares
 	 */
 	public static void generateFile(Map<Integer,PumaPopulation> pumas,Map<Integer,HarePopulation> hares){
-<<<<<<< HEAD
-=======
 		
 		
 		 
@@ -101,7 +99,6 @@ public class Output {
 		int T = 6;
 		
 		generateFile(pumas, hares, T);
->>>>>>> refs/remotes/origin/branch1
 		
 		
 		

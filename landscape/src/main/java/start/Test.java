@@ -29,19 +29,12 @@ public class Test {
 		Model model = new Model(hares, pumas);
 		
 		int T = 10;
-		double dt=.01; 
+		double dt=.01;
 		
 		model.evolve(T, dt);
 		
-		double[][] pumadensity = pumas.getDensities();
-		double[][] haredensity = hares.getDensities();
-		
 		//output pictures
-<<<<<<< HEAD
-		//Output.generateFile();
-=======
 //		Output.generateFile(pumas.getDensities(), hares.getDensities());
->>>>>>> refs/remotes/origin/branch1
 		
 		//it only create one ppm file  , so there shoule be a loop to generate a number of files including all timesteps;
 		// and the third parameter means the the current timestep
