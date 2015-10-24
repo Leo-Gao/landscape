@@ -8,13 +8,7 @@ import javax.swing.filechooser.FileSystemView;
 
 import model.Landscape;
 import model.Model;
-import model.ModelGeneration;
-import model.ModelGenerationImpl;
-import model.ModelHare;
-import model.ModelPuma;
-import pojo.Hare;
 import pojo.HarePopulation;
-import pojo.Puma;
 import pojo.PumaPopulation;
 import until.io.Input;
 import until.io.Output;
@@ -24,8 +18,8 @@ public class Test {
 	
 	public static void main(String[] args) throws IOException {
 		//load file  and init landscpae
-		String path = Class.class.getResource("/").toString();
-		File dat = new File(path+"property.properties");
+		String path = System.getProperty("user.dir");
+		File dat = new File(path+File.separatorChar+"property.properties");
 		int[][] landScape = Input.loadFile(dat);
 		
 		Landscape grid=new Landscape(landScape);
@@ -43,8 +37,15 @@ public class Test {
 		double[][] haredensity = hares.getDensities();
 		
 		//output pictures
+<<<<<<< HEAD
 		//Output.generateFile();
+=======
+//		Output.generateFile(pumas.getDensities(), hares.getDensities());
+>>>>>>> refs/remotes/origin/branch1
 		
+		//it only create one ppm file  , so there shoule be a loop to generate a number of files including all timesteps;
+		// and the third parameter means the the current timestep
+		Output.generateFile(pumas.getDensities(),hares.getDensities(),T);
 	
 	}
 }
