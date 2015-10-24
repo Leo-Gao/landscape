@@ -10,13 +10,13 @@ import model.Landscape;
 
 public class HarePopulation implements Population {
 	//birth rate of hares
-	private double r = 0.08d;
+	private double birthrate = 0.08d;
 	
 	//predation rate at which pumas eat hares
-	private double a = 0.04d;
+	private double deathrate = 0.04d;
 	
 	//diffusion rates for hares
-	private double k = 0.2d;
+	private double diffusionrate = 0.2d;
 	
 	//densities
 	private double[][] densities; 
@@ -38,32 +38,49 @@ public class HarePopulation implements Population {
 	}
 
 	@Override
-	public void timeStepSquare(int i, int j, double pumadensity) {
+	public void timeStepSquare(int i, int j, double dt, double pumadensity) {
 		//update population in square, referencing initDensities array
 		//for densities of neighboring squares
-		
-		// equation goes here 
-		
-		diffuseSquare(i,j);
+		double old_density = initDensities[i][j];
+		double new_density= old_density + dt* birthrate * old_density - dt * deathrate *old_density * pumadensity;
+		new_density = diffuseSquare( i,j, new_density, dt);
+		densities[i][j]=new_density;
 	}
 
 	@Override
-	public void timeStepAll(Population pumas) {
+	public void timeStepAll(double dt, Population pumas) {
 		//save state at beginning of timestep
-		double[][] initDensities = densities;
-		
+		this.initDensities = densities;	
 		//evolve each square
-		for (int i=1; i < gridwidth-1; i++){
-			for (int j=1; j < gridheight-1; j++){
-				timeStepSquare(i,j, pumas.getDensity(i, j));
-			}
+		for (int i=1; i < grid.getWidth(); i++){
+			for (int j=1; j < grid.getHeight(); j++){
+				 if (grid.isLand(i,j)){
+				timeStepSquare(i,j, dt,pumas.getDensity(i, j));
+				 }
+				}
 		}
 	}
 
 	@Override
-	public void diffuseSquare(int i, int j) {
-		// TODO Auto-generated method stub
-		
+	public double diffuseSquare(int i, int j,double init_density,double dt) {
+		double old_density= initDensities[i][j];
+		double new_density = init_density + diffusionrate*(density_sum(i,j)-(double)grid.countLand(i,j)*old_density);
+		return new_density;
+	}
+
+	private double density_sum(int i, int j) {
+		double sum =0;
+		sum = sum + getOldDensity(i-1,j)+ getOldDensity(i+1,j)+ getOldDensity(i,j-1)+ getOldDensity(i,j+1);
+		return sum;
+	}
+
+	private double getOldDensity(int i, int j) {
+		if (grid.isLand(i,j)){
+			return initDensities[i][j];
+		}
+		else{
+			return 0;
+		}
 	}
 
 	@Override
@@ -88,8 +105,12 @@ public class HarePopulation implements Population {
 
 	@Override
 	public double getDensity(int i, int j) {
-		// TODO Auto-generated method stub
+		if (grid.isLand(i,j)){
+			return densities[i][j];
+		}
+		else{
 		return 0;
+		}
 	}
 
 	@Override

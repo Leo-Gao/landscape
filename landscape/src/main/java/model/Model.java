@@ -1,7 +1,5 @@
 package model;
 
-import java.util.Map;
-
 import pojo.HarePopulation;
 import pojo.PumaPopulation;
 

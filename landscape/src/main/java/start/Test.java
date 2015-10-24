@@ -38,8 +38,11 @@ public class Test {
 		
 		model.evolve(T);
 		
+		double[][] pumadensity = pumas.getDensities();
+		double[][] haredensity = hares.getDensities();
+		
 		//output pictures
-		Output.generateFile(pumas.getDensities(), hares.getDensities());
+		Output.generateFile();
 		
 	
 	}

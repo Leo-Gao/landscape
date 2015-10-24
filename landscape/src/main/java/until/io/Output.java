@@ -12,7 +12,7 @@ public class Output {
 	 * @param pumas
 	 * @param hares
 	 */
-	public static void generateFile(Map<Integer,PumaPopulation> pumas,Map<Integer,Hare> hares){
+	public static void generateFile(Map<Integer,PumaPopulation> pumas,Map<Integer,HarePopulation> hares){
 		
 		
 		
