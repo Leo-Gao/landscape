@@ -66,7 +66,7 @@ public class Input {
 		return result;
 	}
 	
-	public static void loadProperties(PumaPopulation puma,Hare hare, File properties){
+	public static void loadProperties(PumaPopulation puma,HarePopulation hare, File properties){
 		
 		FileInputStream in;
 		try {

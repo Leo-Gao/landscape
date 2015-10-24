@@ -5,7 +5,7 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.util.Map;
 
-import pojo.Hare;
+import pojo.HarePopulation;
 import pojo.PumaPopulation;
 
 public class Output {
@@ -15,12 +15,17 @@ public class Output {
 	 * @param pumas
 	 * @param hares
 	 */
-	public static void generateFile(Map<Integer,PumaPopulation> pumas,Map<Integer,Hare> hares){
+	public static void generateFile(Map<Integer,PumaPopulation> pumas,Map<Integer,HarePopulation> hares){
 		
 		
 		 
 	}
-	
+	/**
+	 *  it will generate one ppm file according two arrays and the landscpae 
+	 * @param pumas
+	 * @param hares
+	 * @param T    current timestep 
+	 */
 	public static void generateFile(double[][] pumas,double[][] hares,int T){
 		String path = System.getProperty("user.dir");
 //		String path = Class.class.getResource("/").toString();
