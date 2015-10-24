@@ -8,14 +8,7 @@ import model.Landscape;
  *
  */
 public class PumaPopulation extends Population {
-	//birth rate of pumas
-	private double birthrate = 0.2d;
-	
-	//mortality rate
-	private double deathrate = 0.06d;
-	
-	//diffusion rates
-	private double diffusionrate = 0.2d;
+
 	
 	//constructors
     public PumaPopulation(Landscape grid){

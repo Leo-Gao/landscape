@@ -10,13 +10,13 @@ public class Population {
 	
 	//default values
 	//birth rate of hares
-	private double birthrate;
+	protected double birthrate;
 	
 	//predation rate at which pumas eat hares
-	private double deathrate;
+	protected double deathrate;
 	
 	//diffusion rates for hares
-	private double diffusionrate;
+	protected double diffusionrate;
 	
 	//densities
 	protected double[][] densities; 
@@ -94,6 +94,7 @@ public class Population {
 	public double diffuseSquare(int i, int j,double init_density,double dt) {
 		double old_density= initDensities[i][j];
 		double new_density = init_density + dt* diffusionrate*(density_sum(i,j)- (double)grid.countLand(i,j)*old_density);
+		if (new_density<0){new_density=0;}
 		return new_density;
 	}
 
@@ -115,13 +116,27 @@ public class Population {
 	public void setBirthRate(double r) {
 		this.birthrate=r;
 	}
+	
+	public double getBirthRate() {
+		return this.birthrate;
+	}
+	
+	
 
 	public void setDeathRate(double a) {
 		this.deathrate=a;
 	}
 
+	public double getDeathRate() {
+		return this.deathrate;
+	}
+	
 	public void setDiffusionRate(double k) {
 		this.diffusionrate=k;
+	}
+	
+	public double getDiffusionRate() {
+		return this.diffusionrate;
 	}
 
 	

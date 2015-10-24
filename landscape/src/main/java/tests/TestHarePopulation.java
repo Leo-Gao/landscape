@@ -6,6 +6,7 @@ import org.junit.Test;
 
 import model.Landscape;
 import pojo.HarePopulation;
+import pojo.PumaPopulation;
 
 public class TestHarePopulation {
 
@@ -87,54 +88,90 @@ public class TestHarePopulation {
 	@Test
 	public void testGetSetDensities() {
 		HarePopulation hares = new HarePopulation(testlandscape);
+		hares.setDensities(new double[][]{{.5,0,0},{14,2,1},{0,1,1}});
+		assertEquals(hares.getDensity(0, 0), .5, .001);
+		assertArrayEquals(hares.getDensities(), new double[][]{{.5,0,0},{14,2,1},{0,1,1}});
 	}
 
 	@Test
 	public void testGetSetDensity() {
-		fail("Not yet implemented");
+		HarePopulation hares = new HarePopulation(testlandscape);
+		hares.setDensity(0, 1, 15.19);
+		assertEquals(hares.getDensity(0, 1), 15.19, .0001);
+		assertEquals(hares.getDensity(0, 0), 0, .0001);
 	}
 
 	@Test
-	public void testInitiatePopulation() {
-		fail("Not yet implemented");
+	public void testSetGetBirthRate() {
+		HarePopulation hares = new HarePopulation(testlandscape, 12);
+		hares.setBirthRate(8.15);
+		assertEquals(hares.getBirthRate(), 8.15, .0001);
 	}
 
 	@Test
-	public void testSetBirthRate() {
+	public void testSetBirthRateException() {
+		HarePopulation hares = new HarePopulation(testlandscape, 12);
+		hares.setBirthRate(-.2);
 		fail("Not yet implemented");
 	}
-
+	
+	@Test
+	public void testSetDeathRateException() {
+		HarePopulation hares = new HarePopulation(testlandscape, 12);
+		hares.setDeathRate(-3701);
+		fail("Not yet implemented");
+	}
+	
 	@Test
 	public void testSetDeathRate() {
-		fail("Not yet implemented");
+		HarePopulation hares = new HarePopulation(testlandscape, 12);
+		hares.setDeathRate(2.1);
+		assertEquals(hares.getDeathRate(), 2.1, .0001);
 	}
 
 	@Test
-	public void testSetDensities() {
-		fail("Not yet implemented");
+	public void testSetAllDensities() {
+		HarePopulation hares = new HarePopulation(testlandscape);
+		hares.setUniformDensity(3);
+		assertEquals(hares.getDensity(0, 2), 3, .001);
+		assertArrayEquals(hares.getDensities(), new double[][]{{3,3,3},{3,3,3},{3,3,3}});
 	}
 
 	@Test
 	public void testSetDiffusionRate() {
-		fail("Not yet implemented");
+		HarePopulation hares = new HarePopulation(testlandscape, 0);
+		hares.setDiffusionRate(3);
+		assertEquals(hares.getDiffusionRate(), 3, .0001);
 	}
 
 	@Test
 	public void testTimeStepAll() {
-		fail("Not yet implemented");
+		Landscape testgrid=new Landscape(new int[][]{{1,1},{1,1}});
+		HarePopulation hares = new HarePopulation (testgrid);
+		PumaPopulation pumas = new PumaPopulation (testgrid,2);
+		hares.setDensities(new double[][]{{.5,14},{4,.2}});
+		hares.setBirthRate(.2);
+		hares.setDeathRate(.3);
+		hares.setDiffusionRate(.25);
+		hares.timeStepAll(.1, pumas);
+		double newdensity1= .5 + .1*(.2*.5 - .3*.5*2 + .25*(14 + 4 - 2*.5));
+		assertEquals(hares.getDensity(0, 0), newdensity1, .05);
+		double newdensity3= .2 + .1*(.2*.2 - .3*.2*2 + .25*(14 + 4 - 2*.2));
+		assertEquals(hares.getDensity(1, 1), newdensity3, .05);
 	}
 
 	@Test
 	public void testTimeStepSquare() {
 		Landscape testgrid=new Landscape(new int[][]{{1,1},{1,1}});
 		HarePopulation hares = new HarePopulation (testgrid);
-		hares.setDensities(new double[][]{{.5,.1},{.4,.2}});
+		hares.setDensities(new double[][]{{.5,.4},{.4,.2}});
+		hares.setInitDensitis(hares.getDensities());
 		hares.setBirthRate(.2);
 		hares.setDeathRate(.3);
 		hares.setDiffusionRate(.25);
 		hares.timeStepSquare(0, 0, .1 ,.3);
-		double newdensity= .5 + .1*(.2*.5 - .3*.5*.3 + .25*(.1+.4 - 2*.5));
-		assertEquals(hares.getDensity(0, 0), newdensity, .0001);
+		double newdensity= .5 + .1*(.2*.5 - .3*.5*.3 + .25*(.4+.4 - 2*.5));
+		assertEquals(hares.getDensity(0, 0), newdensity, .05);
 	}
 
 
