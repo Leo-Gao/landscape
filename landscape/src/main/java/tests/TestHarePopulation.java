@@ -42,9 +42,10 @@ public class TestHarePopulation {
 	public void testDiffuseIntoSquare() {
 		HarePopulation hares = new HarePopulation(testlandscape, 5);
 		hares.setDensity(1,1, 0);
-		hares.setDiffusionRate(2);
+		hares.setInitDensitis(hares.getDensities());
+		hares.setDiffusionRate(.2);
 		double new_density = hares.diffuseSquare(1, 1, 0, .1);
-		double new_density_expected= .1*2*(4*5 - 4*0);
+		double new_density_expected= 0 + .1*.2*(4*5 - 4*0);
 		assertEquals(new_density_expected, new_density, .0001);
 	}
 	
@@ -52,6 +53,7 @@ public class TestHarePopulation {
 	public void testDiffuseOutOfSquare() {
 		HarePopulation hares = new HarePopulation(testlandscape, 0);
 		hares.setDensity(1,1, 5);
+		hares.setInitDensitis(hares.getDensities());
 		hares.setDiffusionRate(.2);
 		double new_density = hares.diffuseSquare(1, 1, 5, .1);
 		double new_density_expected= 5 + .1*.2*(4*0 - 4*5);
@@ -63,30 +65,32 @@ public class TestHarePopulation {
 		double[][] densityarray = new double[][] {{2.1,13,10},{.4,3,17},{3.76,20,.1}};
 		HarePopulation hares = new HarePopulation(testlandscape, densityarray);
 		hares.setDiffusionRate(2);
+		hares.setInitDensitis(hares.getDensities());
 		double new_density = hares.diffuseSquare(1, 1, 3, .1);
-		double new_density_expected= .1*2*(13 + .4 + 17 + 20 - 4*3);
+		double new_density_expected= 3 + .1*2*(13 + .4 + 17 + 20 - 4*3);
 		assertEquals(new_density_expected, new_density, .0001);
 	}
 	
 	@Test
-	public void testDiffuseSquareWater() {
+	public void testDiffuseSquareWithWater() {
 		double[][] densityarray = new double[][] {{2.1,13,10},{.4,3,17},{3.76,20,.1}};
 		HarePopulation hares = new HarePopulation(testlandscapewithwater, densityarray);
 		hares.setDiffusionRate(2);
+		hares.setInitDensitis(hares.getDensities());
 		double new_density = hares.diffuseSquare(1, 1, 3, .1);
-		double new_density_expected= .1*2*(13 + .4 - 2*3);
+		double new_density_expected= 3+.1*2*(13 + .4 - 2*3);
 		assertEquals(new_density_expected, new_density, .0001);
 	}
 	
 	
 	
 	@Test
-	public void testGetDensities() {
-		fail("Not yet implemented");
+	public void testGetSetDensities() {
+		HarePopulation hares = new HarePopulation(testlandscape);
 	}
 
 	@Test
-	public void testGetDensity() {
+	public void testGetSetDensity() {
 		fail("Not yet implemented");
 	}
 

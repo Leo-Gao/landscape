@@ -94,7 +94,7 @@ public class Output {
 	public static void main(String[] args) {
 		double[][] pumas = {{0,0,0,15},{0,0,0,0},{0,0,0,0},{15,0,0,0}};
 		double[][] hares = {{0,0,0,0},{0,15,0,0},{0,0,15,0},{0,0,0,0}};
-		double[][] landscpae = {{0,0,0,15},{0,7,0,0},{0,0,7,0},{15,0,0,0}};
+		double[][] landscape = {{0,0,0,15},{0,7,0,0},{0,0,7,0},{15,0,0,0}};
 		
 		int T = 6;
 		
