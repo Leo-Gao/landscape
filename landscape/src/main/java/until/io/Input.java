@@ -7,8 +7,8 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.util.Properties;
 
-import pojo.Hare;
-import pojo.Puma;
+import pojo.HarePopulation;
+import pojo.PumaPopulation;
 
 public class Input {
 	public static Properties pro = new Properties();
@@ -66,7 +66,7 @@ public class Input {
 		return result;
 	}
 	
-	public static void loadProperties(Puma puma,Hare hare, File properties){
+	public static void loadProperties(PumaPopulation puma,Hare hare, File properties){
 		
 		FileInputStream in;
 		try {

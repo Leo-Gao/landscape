@@ -6,7 +6,7 @@ import java.io.IOException;
 import java.util.Map;
 
 import pojo.Hare;
-import pojo.Puma;
+import pojo.PumaPopulation;
 
 public class Output {
 	
@@ -15,7 +15,7 @@ public class Output {
 	 * @param pumas
 	 * @param hares
 	 */
-	public static void generateFile(Map<Integer,Puma> pumas,Map<Integer,Hare> hares){
+	public static void generateFile(Map<Integer,PumaPopulation> pumas,Map<Integer,Hare> hares){
 		
 		
 		 
