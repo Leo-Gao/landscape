@@ -10,7 +10,6 @@ import model.Landscape;
 public class PumaPopulation extends Population {
 
 	
-	//constructors
     public PumaPopulation(Landscape grid){
     	super(grid);
     }

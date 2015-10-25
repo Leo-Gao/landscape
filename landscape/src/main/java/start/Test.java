@@ -28,10 +28,12 @@ public class Test {
 		
 		Model model = new Model(hares, pumas);
 		
-		int T = 10;
-		double dt=.01;
+		int Tmax = 10;
+		double dt= 1;
 		
-		model.evolve(T, dt);
+		//loop: update model and create ppm file
+		for (int T=0; T<Tmax; T++){
+		model.timestep( dt);
 		
 		//output pictures
 //		Output.generateFile(pumas.getDensities(), hares.getDensities());
@@ -39,6 +41,7 @@ public class Test {
 		//it only create one ppm file  , so there shoule be a loop to generate a number of files including all timesteps;
 		// and the third parameter means the the current timestep
 		Output.generateFile(pumas.getDensities(),hares.getDensities(),T);
+		}
 	
 	}
 }
