@@ -1,5 +1,7 @@
 package pojo;
 
+import java.util.Random;
+
 import model.Landscape;
 
 
@@ -280,6 +282,16 @@ public class Population {
 		}
 	}
 
+	
+	public void setRandomDensities(double max){
+		long seed = 43938726L;
+		Random random = new Random(seed);
+		for (int i=0; i < grid.getLandWidth(); i++){
+			for (int j=0; j < grid.getLandHeight(); j++){
+				setDensity(i,j,random.nextDouble()*max);
+			}
+		}
+	}
 		
 	/**
 	 * manually set array of densities at beginning of step.
