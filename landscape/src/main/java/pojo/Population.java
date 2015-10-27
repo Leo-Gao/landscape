@@ -47,6 +47,7 @@ public class Population {
 	Landscape grid;
 	
 	
+	
 	/**
 	 * Constructor with no density arguments.
 	 * Fills in default density of all 0s.
@@ -91,45 +92,10 @@ public class Population {
 		initDensities = new double[width][height];
 	}
 
-	/**
-	 * Sets population density on all land squares to given value.
-	 * @param density
-	 */
-	public void setUniformDensity(double density) {
-		for (int i=0; i < grid.getLandWidth(); i++){
-			for (int j=0; j < grid.getLandHeight(); j++){
-				setDensity(i,j,density);
-			}
-		}
-	}
+	
+	
 
-	/**
-	 * Sets population density at 1 square to given value.
-	 * No effect if water.
-	 * @param i coordinate of square to set
-	 * @param j coordinate of square to set
-	 * @param density
-	 */
-	public void setDensity(int i, int j, double density) {
-		if (grid.isLand(i,j)){
-			densities[i][j] = density;
-		}
-		else{
-			if (density !=0 ){
-				System.out.println("could not set density at ("+i+ ", "+ j+ ") to " + density+" , is water");;
-			}
-		}
-	}
-
-	/**
-	 * Evolves one population one square one timestep, interacting with 1 other population.
-	 * Method to be overriden by subclass' specific equation.
-	 * @param i index of square
-	 * @param j index of square
-	 * @param dt length of timestep
-	 * @param other_density density of other predator or prey population at this location
-	 */
-	public void timeStepSquare(int i, int j, double dt, double other_density) {}
+	
 
 	/**
 	 * timesteps this population for the whole landscape for 1 step, interacting with 1 other population.
@@ -149,6 +115,16 @@ public class Population {
 		}
 	}
 
+	/**
+	 * Evolves one population one square one timestep, interacting with 1 other population.
+	 * Method to be overriden by subclass' specific equation.
+	 * @param i index of square
+	 * @param j index of square
+	 * @param dt length of timestep
+	 * @param other_density density of other predator or prey population at this location
+	 */
+	public void timeStepSquare(int i, int j, double dt, double other_density) {}
+	
 	/**
 	 * Diffusion part of equation evolving the population on each square.
 	 * Same for all species.
@@ -194,6 +170,8 @@ public class Population {
 		}
 	}
 
+	
+	
 	/**
 	 * set birth rate
 	 * @param r birthrate
@@ -241,6 +219,36 @@ public class Population {
 	public double getDiffusionRate() {
 		return this.diffusionrate;
 	}
+	
+	/**
+	 * Sets population density on all land squares to given value.
+	 * @param density
+	 */
+	public void setUniformDensity(double density) {
+		for (int i=0; i < grid.getLandWidth(); i++){
+			for (int j=0; j < grid.getLandHeight(); j++){
+				setDensity(i,j,density);
+			}
+		}
+	}
+
+	/**
+	 * Sets population density at 1 square to given value.
+	 * No effect if water.
+	 * @param i coordinate of square to set
+	 * @param j coordinate of square to set
+	 * @param density
+	 */
+	public void setDensity(int i, int j, double density) {
+		if (grid.isLand(i,j)){
+			densities[i][j] = density;
+		}
+		else{
+			if (density !=0 ){
+				System.out.println("could not set density at ("+i+ ", "+ j+ ") to " + density+" , is water");;
+			}
+		}
+	}
 
 	/**
 	 * get density at square (i,j)
@@ -278,7 +286,42 @@ public class Population {
 			}
 		}
 	}
+	
+	/**
+	 * average population densities on all squares including water
+	 * @return average density
+	 */
+	public double getAvgDensityGrid(){
+		double square_count = 0;
+		double sum_density= 0;
+		for (int i=0; i < grid.getLandWidth(); i++){
+			for (int j=0; j < grid.getLandHeight(); j++){
+				sum_density += getDensity(i,j);
+				square_count += 1;
+			}
+		}
+		double avgdensity = sum_density / square_count;
+		return avgdensity;
+	}
 
+	/**
+	 * average population density for land area
+	 * @return average density
+	 */
+	public double getAvgDensityLand(){
+		double square_count = 0;
+		double sum_density= 0;
+		for (int i=0; i < grid.getLandWidth(); i++){
+			for (int j=0; j < grid.getLandHeight(); j++){
+				if (grid.isLand(i,j)){
+				sum_density += getDensity(i,j);
+				square_count += 1;
+				}
+			}
+		}
+		double avgdensity = sum_density / square_count;
+		return avgdensity;
+	}
 		
 	/**
 	 * manually set array of densities at beginning of step.
