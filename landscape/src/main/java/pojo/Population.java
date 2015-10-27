@@ -334,6 +334,7 @@ public class Population {
 			}
 		}
 	}
+	
 		
 	/**
 	 * manually set array of densities at beginning of step.
