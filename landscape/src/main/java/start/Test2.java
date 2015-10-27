@@ -17,6 +17,10 @@ import until.io.Output;
 public class Test2 {
 	
 	public static void main(String[] args) throws IOException {
+		
+		
+		
+		
 		//load file  and init landscpae
 		String path = System.getProperty("user.dir");
 		File dat = new File(path+File.separatorChar+"property.properties");
