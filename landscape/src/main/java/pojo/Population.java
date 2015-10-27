@@ -1,5 +1,7 @@
 package pojo;
 
+import java.util.Random;
+
 import model.Landscape;
 
 
@@ -45,7 +47,6 @@ public class Population {
 	 * the population is on.
 	 */
 	Landscape grid;
-	
 	
 	
 	/**
@@ -113,6 +114,7 @@ public class Population {
 				 }
 				}
 		}
+	
 	}
 
 	/**
@@ -321,6 +323,16 @@ public class Population {
 		}
 		double avgdensity = sum_density / square_count;
 		return avgdensity;
+	}
+	
+	public void setRandomDensities(double max){
+		long seed = 43938726L;
+		Random random = new Random(seed);
+		for (int i=0; i < grid.getLandWidth(); i++){
+			for (int j=0; j < grid.getLandHeight(); j++){
+				setDensity(i,j,random.nextDouble()*max);
+			}
+		}
 	}
 		
 	/**

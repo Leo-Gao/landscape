@@ -24,7 +24,9 @@ public class Test {
 		
 		Landscape grid=new Landscape(landScape);
 		PumaPopulation pumas = new PumaPopulation(grid);
+		pumas.setRandomDensities(15);
 		HarePopulation hares = new HarePopulation(grid);
+		hares.setRandomDensities(15);
 		
 		Model model = new Model(hares, pumas);
 		
