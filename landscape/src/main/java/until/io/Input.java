@@ -5,6 +5,7 @@ import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
+import java.util.HashMap;
 import java.util.Properties;
 
 import pojo.HarePopulation;
@@ -66,7 +67,8 @@ public class Input {
 		return result;
 	}
 	
-	public static void loadProperties(PumaPopulation puma,HarePopulation hare, File properties){
+	public static HashMap<String, Double> loadProperties(File properties){
+		HashMap<String, Double> paras = new HashMap<String, Double>();
 		
 		FileInputStream in;
 		try {
@@ -74,27 +76,27 @@ public class Input {
 			pro.load(in);
 			in.close();
 		} catch (Exception e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		
-		Double r = Double.parseDouble(pro.getProperty("r"));
-		Double a = Double.parseDouble(pro.getProperty("a"));
-		Double k = Double.parseDouble(pro.getProperty("k"));
 		
-		Double b = Double.parseDouble(pro.getProperty("b"));
-		Double m = Double.parseDouble(pro.getProperty("m"));
-		Double l = Double.parseDouble(pro.getProperty("l"));
+		Double birth_h = Double.parseDouble(pro.getProperty("birth_h"));
+		Double death_h = Double.parseDouble(pro.getProperty("death_h"));
+		Double diffusion_h = Double.parseDouble(pro.getProperty("diffusion_h"));
 		
+		paras.put("birth_h", birth_h);
+		paras.put("death_h", death_h);
+		paras.put("diffusion_h", diffusion_h);
 		
+		Double birth_p = Double.parseDouble(pro.getProperty("birth_p"));
+		Double death_p = Double.parseDouble(pro.getProperty("death_p"));
+		Double diffusion_p = Double.parseDouble(pro.getProperty("diffusion_p"));
 		
+		paras.put("birth_p", birth_p);
+		paras.put("death_p", death_p);
+		paras.put("diffusion_p", diffusion_p);
 		
-	}
-	
-	
-	public static void main(String[] args) throws IOException {
-//		InputStream in = Class.class.getResourceAsStream("property.properties");
-		Input.loadFile(new File("d://small.dat"));
+		return paras;
 		
 	}
 	

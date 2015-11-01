@@ -247,7 +247,7 @@ public class Population {
 		}
 		else{
 			if (density !=0 ){
-				System.out.println("could not set density at ("+i+ ", "+ j+ ") to " + density+" , is water");;
+//				System.out.println("could not set density at ("+i+ ", "+ j+ ") to " + density+" , is water");;
 			}
 		}
 	}
