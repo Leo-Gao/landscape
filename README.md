@@ -1,29 +1,13 @@
 # landscape
 
-		//load file  and init landscpae
-		File dat = new File("");
-		int[][] landScape = Input.loadLandscape(dat);
-		
-		//temp 
-		// add file
-		Puma initPuma = new Puma();
-		Hare initHare = new Hare();
-		
-		//put landscape to initObject
-		initPuma.landScape = landScape;
-		initHare.landScpage = landScape;
-		
-		//according to oringal landscape to  create first densities randomly
-		initPuma.setDensities(initPuma.generateIntDentities());
-		initHare.setDensities(initHare.generateIntDentities());
+build tool : maven 2   command: mvn package
 
-		//use modelObject to simulate puma,hare ,then create a number of status of densities 
-		ModelPuma modelPuma = new ModelPumaImpl();
-		ModelHare modelHare = new ModelHareImpl();
-		int T = 10;
-		HashMap<Integer, Puma> pumas = (HashMap<Integer, Puma>) modelPuma.getAll(initPuma, T);
-		HashMap<Integer, Hare> hares = (HashMap<Integer, Hare>) modelHare.getAll(initHare, T);
-		
-		//output pictures
-		Output.generateFile(pumas, hares);
-	
+entrance class :  start.Simulation.java
+
+parameters :  the landscape description , a ASCII file
+
+execution commancd : java -classpath start.Simulation small.dat
+
+output directory of ppm file:  ./output
+
+output of average data : command sceen 

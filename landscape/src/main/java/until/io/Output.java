@@ -28,9 +28,13 @@ public class Output {
 	 * @param T    current timestep 
 	 */
 	public static void generateFile(double[][] pumas,double[][] hares,int[][] landscape,int T){
-		String path = Class.class.getResource("/").getPath();
+//		String path = Class.class.getResource("/").getPath();
+		String path = System.getProperty("user.dir");
 		DecimalFormat df = new DecimalFormat("00000");
-	
+		File outputDir = new File(path+File.separatorChar+"output");
+		if (!outputDir.exists()) {
+			outputDir.mkdirs();
+		}
 		File file = new File(path+File.separatorChar+"output"+File.separatorChar+df.format(T)+".ppm");
 		
 		int row = pumas[0].length;

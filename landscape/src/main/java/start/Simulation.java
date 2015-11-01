@@ -13,13 +13,14 @@ import until.io.Input;
 import until.io.Output;
 
 
-public class Test {
+public class Simulation {
 	
 	public static void main(String[] args) throws IOException {
 		
 		//load file  and init landscpae
-		String path = Class.class.getResource("/").getPath();
-		File dat = new File(path+File.separatorChar+"small.dat");
+		String path = System.getProperty("user.dir");
+//		String path = tt.getClass().getResource("/small.dat").getPath();
+		File dat = new File(path+File.separatorChar+args[0]);
 		int[][] landScape = Input.loadFile(dat);
 		Landscape grid=new Landscape(landScape);
 
@@ -50,10 +51,11 @@ public class Test {
 		
 		Model model = new Model(hares, pumas);
 		
-		int Tmax = 500;
-		int Tmin = 0;
-		int T = 10;
-		double dt= 0.4;
+		int Tmax = paras.get("Tmax").intValue();
+		int Tmin = paras.get("Tmin").intValue();
+		int T = paras.get("T").intValue();
+		int aveT = paras.get("aveT").intValue();
+		double dt= paras.get("dt");
 		int simuCount = 0;
 		//issue start time
 		double startTime = System.currentTimeMillis();
@@ -73,7 +75,7 @@ public class Test {
 			}
 			
 			// set interval as 100 : every 100 timestep  printout the average value
-			if (simuCount % 100 == 0) {
+			if (simuCount % aveT == 0) {
 				System.out.println("Average of puma densities "+"for simulation times "+simuCount+ " across the wohle grid is : "+ pumas.getAvgDensityGrid());
 				System.out.println("Average of hare densities "+"for simulation times "+simuCount+ " across the wohle grid is : "+ hares.getAvgDensityGrid());
 			}

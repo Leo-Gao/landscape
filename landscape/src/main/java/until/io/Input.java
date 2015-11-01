@@ -7,6 +7,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.util.HashMap;
 import java.util.Properties;
+import java.util.Set;
 
 import pojo.HarePopulation;
 import pojo.PumaPopulation;
@@ -79,22 +80,29 @@ public class Input {
 			e.printStackTrace();
 		}
 		
+		Set<String> pros = pro.stringPropertyNames();
+		for(String ss:pros){
+			Double temp = Double.parseDouble(pro.getProperty(ss));
+			paras.put(ss, temp);
+		}
 		
-		Double birth_h = Double.parseDouble(pro.getProperty("birth_h"));
-		Double death_h = Double.parseDouble(pro.getProperty("death_h"));
-		Double diffusion_h = Double.parseDouble(pro.getProperty("diffusion_h"));
+//		Double birth_h = Double.parseDouble(pro.getProperty("birth_h"));
+//		Double death_h = Double.parseDouble(pro.getProperty("death_h"));
+//		Double diffusion_h = Double.parseDouble(pro.getProperty("diffusion_h"));
+//		
+//		paras.put("birth_h", birth_h);
+//		paras.put("death_h", death_h);
+//		paras.put("diffusion_h", diffusion_h);
+//		
+//		Double birth_p = Double.parseDouble(pro.getProperty("birth_p"));
+//		Double death_p = Double.parseDouble(pro.getProperty("death_p"));
+//		Double diffusion_p = Double.parseDouble(pro.getProperty("diffusion_p"));
+//		
+//		paras.put("birth_p", birth_p);
+//		paras.put("death_p", death_p);
+//		paras.put("diffusion_p", diffusion_p);
 		
-		paras.put("birth_h", birth_h);
-		paras.put("death_h", death_h);
-		paras.put("diffusion_h", diffusion_h);
 		
-		Double birth_p = Double.parseDouble(pro.getProperty("birth_p"));
-		Double death_p = Double.parseDouble(pro.getProperty("death_p"));
-		Double diffusion_p = Double.parseDouble(pro.getProperty("diffusion_p"));
-		
-		paras.put("birth_p", birth_p);
-		paras.put("death_p", death_p);
-		paras.put("diffusion_p", diffusion_p);
 		
 		return paras;
 		
