@@ -84,6 +84,16 @@ public class Population {
 		setDensities(densityarray);
 	}
 
+	
+	public Population(Population copy){
+		this.grid=copy.grid;
+		initiateArrays(grid.getLandWidth(),grid.getLandHeight());
+		this.setDensities(copy.getDensities());
+		this.setBirthRate(copy.getBirthRate());
+		this.setDeathRate(copy.getDeathRate());
+		this.setDiffusionRate(copy.getDiffusionRate());
+	}
+	
 	/**
 	 * Called by constructors,
 	 * initiates arrays to correct sizes to match Landscape grid.
@@ -325,8 +335,7 @@ public class Population {
 		return avgdensity;
 	}
 	
-	public void setRandomDensities(double max){
-		long seed = 43938726L;
+	public void setRandomDensities(double max, long seed){
 		Random random = new Random(seed);
 		for (int i=0; i < grid.getLandWidth(); i++){
 			for (int j=0; j < grid.getLandHeight(); j++){

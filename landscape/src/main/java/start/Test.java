@@ -19,7 +19,7 @@ public class Test {
 		
 		//load file  and init landscpae
 		String path = Class.class.getResource("/").getPath();
-		File dat = new File(path+File.separatorChar+"superSmall.dat");
+		File dat = new File(path+File.separatorChar+"small.dat");
 		int[][] landScape = Input.loadFile(dat);
 		Landscape grid=new Landscape(landScape);
 
@@ -31,13 +31,22 @@ public class Test {
 		pumas.setBirthRate(paras.get("birth_p"));
 		pumas.setDeathRate(paras.get("death_p"));
 		pumas.setDiffusionRate(paras.get("diffusion_p"));
-		pumas.setRandomDensities(5);
 		
+//		pumas.setBirthRate(.1);
+//		pumas.setDeathRate(.5);
+//		pumas.setDiffusionRate(.4);
+		long seed1 = 539872L;
+		pumas.setRandomDensities(5, seed1);
 		HarePopulation hares = new HarePopulation(grid);
+
 		hares.setBirthRate(paras.get("birth_h"));
 		hares.setDeathRate(paras.get("death_h"));
 		hares.setDiffusionRate(paras.get("diffusion_h"));
-		hares.setRandomDensities(5);
+		long seed2 = 348987L;
+//		hares.setBirthRate(.8);
+//		hares.setDeathRate(.4);
+//		hares.setDiffusionRate(.1);
+		hares.setRandomDensities(5, seed2);
 		
 		Model model = new Model(hares, pumas);
 		

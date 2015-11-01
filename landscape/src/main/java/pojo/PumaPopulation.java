@@ -21,6 +21,11 @@ public class PumaPopulation extends Population {
     public PumaPopulation(Landscape grid, double[][] densityarray){
     	super(grid, densityarray);
     }
+    
+    public PumaPopulation(Population copy){
+    	super(copy);
+    }
+	
 
 	public void timeStepSquare(int i, int j, double dt, double haredensity) {
 		double old_density = initDensities[i][j];

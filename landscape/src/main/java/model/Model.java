@@ -47,8 +47,8 @@ public class Model {
 	 */
 	public void timestep(double dt) {
 		//save copy of initial state of hares and pumas
-		HarePopulation hares_init=hares;
-		PumaPopulation pumas_init=pumas;
+		HarePopulation hares_init=new HarePopulation(hares);
+		PumaPopulation pumas_init=new PumaPopulation(pumas);
 		
 		//evolve referencing initial state of other population
 		pumas.timeStepAll(dt, hares_init);

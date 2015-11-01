@@ -42,6 +42,10 @@ public class HarePopulation extends Population {
 		super(grid,densityarray);
 	}
 
+	
+	public HarePopulation(Population copy){
+		super(copy);
+	}
 	public void timeStepSquare(int i, int j, double dt, double pumadensity) {
 		//update population in square, referencing initDensities array
 		//for densities of neighboring squares
