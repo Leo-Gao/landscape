@@ -57,14 +57,6 @@ public class Input {
 	        }
 		}
 		
-//		for (int i = 0; i < row; i++) {
-//			StringBuffer aa = new StringBuffer();
-//			for (int j = 0; j < column; j++) {
-//				aa.append(result[i][j]+" ");
-//			}
-//			System.out.println(aa.toString());
-//		}
-		
 		return result;
 	}
 	
@@ -85,24 +77,6 @@ public class Input {
 			Double temp = Double.parseDouble(pro.getProperty(ss));
 			paras.put(ss, temp);
 		}
-		
-//		Double birth_h = Double.parseDouble(pro.getProperty("birth_h"));
-//		Double death_h = Double.parseDouble(pro.getProperty("death_h"));
-//		Double diffusion_h = Double.parseDouble(pro.getProperty("diffusion_h"));
-//		
-//		paras.put("birth_h", birth_h);
-//		paras.put("death_h", death_h);
-//		paras.put("diffusion_h", diffusion_h);
-//		
-//		Double birth_p = Double.parseDouble(pro.getProperty("birth_p"));
-//		Double death_p = Double.parseDouble(pro.getProperty("death_p"));
-//		Double diffusion_p = Double.parseDouble(pro.getProperty("diffusion_p"));
-//		
-//		paras.put("birth_p", birth_p);
-//		paras.put("death_p", death_p);
-//		paras.put("diffusion_p", diffusion_p);
-		
-		
 		
 		return paras;
 		

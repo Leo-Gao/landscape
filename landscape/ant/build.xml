@@ -1,0 +1,35 @@
+<?xml version="1.0"?>
+<project name="landscape" default="all" basedir=".">
+  <target name="all">
+    
+  </target>
+	
+  <target name="init">
+    <mkdir dir="build/classes"/>
+    <mkdir dir="build/test-classes"/>
+  </target>
+
+  <target name="compile" depends="init">
+    <javac srcdir="../src" destdir="build/classes">
+      <include name="**/*.java"/>
+      <classpath>
+      	<fileset dir="./build/lib/">
+      		<include name="*.jar"/>
+      	</fileset>
+      </classpath>
+    </javac>
+  </target>
+
+  <target name="jar" depends="compile">
+	<jar destfile="build/lib/landscape.jar" basedir="build/classes"/>
+  </target>  
+
+  <target name="runSimulation" depends="jar">
+    <java classname="start.Simulation">
+    	<arg value="small.dat"/>
+    	<classpath>
+        <pathelement location="build/classes"/>
+      </classpath>
+    </java>
+  </target>
+</project>
