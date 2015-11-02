@@ -237,6 +237,7 @@ public class Population {
 	 * @param density
 	 */
 	public void setUniformDensity(double density) {
+		//TODO i height ;  j weight
 		for (int i=0; i < grid.getLandWidth(); i++){
 			for (int j=0; j < grid.getLandHeight(); j++){
 				setDensity(i,j,density);
@@ -352,6 +353,22 @@ public class Population {
 	 */
 	public void setInitDensitis(double[][] densities) {
 		initDensities=densities;
+	}
+	
+	/**
+	 * @return  max value of the desities accross gird
+	 */
+	public double getMaxValue(){
+		
+		Double max = 0d;
+		for (int i=0; i < grid.getLandWidth(); i++){
+			for (int j=0; j < grid.getLandHeight(); j++){
+				if (densities[i][j] > max) {
+					max = densities[i][j];
+				}
+			}
+		}
+		return max;
 	}
 	
 }

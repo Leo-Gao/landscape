@@ -2,7 +2,6 @@ package start;
 
 import java.io.File;
 import java.io.IOException;
-import java.text.DecimalFormat;
 import java.util.HashMap;
 
 import model.Landscape;
@@ -20,7 +19,8 @@ public class Simulation {
 		//load file  and init landscpae
 		String path = System.getProperty("user.dir");
 //		String path = tt.getClass().getResource("/small.dat").getPath();
-		File dat = new File(path+File.separatorChar+args[0]);
+//		File dat = new File(path+File.separatorChar+args[0]);
+		File dat = new File(path+File.separatorChar+"small.dat");
 		int[][] landScape = Input.loadFile(dat);
 		Landscape grid=new Landscape(landScape);
 
@@ -71,7 +71,11 @@ public class Simulation {
 				
 				//it only create one ppm file  , so there shoule be a loop to generate a number of files including all timesteps;
 				// and the third parameter means the the current timestep
-				Output.generateFile(pumas.getDensities(),hares.getDensities(),landScape,simuCount/T);
+				Output.generateFileS(pumas, hares,simuCount/T);
+				
+				//seperately create file
+				Output.generateFile(pumas, "puma", simuCount/T);
+				Output.generateFile(hares, "hare", simuCount/T);
 			}
 			
 			// set interval as 100 : every 100 timestep  printout the average value

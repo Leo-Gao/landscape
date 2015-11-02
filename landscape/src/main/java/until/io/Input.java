@@ -45,9 +45,9 @@ public class Input {
 
 			//check the firsrt line to identify the row and column 
 	        if(firstLine){
-	        	column = Integer.parseInt(ss[0]);
-	        	row = Integer.parseInt(ss[1]);
-	        	result = new int[row][column];
+	        	column = Integer.parseInt(ss[0]);//Nx
+	        	row = Integer.parseInt(ss[1]);//Ny
+	        	result = new int[row][column]; //int[row][column]
 	        	firstLine = false;
 	        	continue;
 	        }
