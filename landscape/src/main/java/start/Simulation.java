@@ -67,7 +67,6 @@ public class Simulation {
 			simuCount++;
 			
 			if (simuCount % T == 0) {
-				//output pictures
 				
 				//it only create one ppm file  , so there shoule be a loop to generate a number of files including all timesteps;
 				// and the third parameter means the the current timestep
