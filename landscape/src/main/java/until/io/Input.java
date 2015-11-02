@@ -2,17 +2,13 @@ package until.io;
 
 import java.io.File;
 import java.io.FileInputStream;
-import java.io.FileNotFoundException;
 import java.io.IOException;
-import java.io.InputStream;
 import java.util.HashMap;
 import java.util.Properties;
 import java.util.Set;
 
-import pojo.HarePopulation;
-import pojo.PumaPopulation;
-
 public class Input {
+	
 	public static Properties pro = new Properties();
 	
 	/**
@@ -59,7 +55,11 @@ public class Input {
 		
 		return result;
 	}
-	
+	/**
+	 * load property file, iterate the property list then store into a HashMap
+	 * @param properties  the target property file
+	 * @return  modified property file
+	 */
 	public static HashMap<String, Double> loadProperties(File properties){
 		HashMap<String, Double> paras = new HashMap<String, Double>();
 		

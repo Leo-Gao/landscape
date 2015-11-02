@@ -18,9 +18,7 @@ public class Simulation {
 		
 		//load file  and init landscpae
 		String path = System.getProperty("user.dir");
-//		String path = tt.getClass().getResource("/small.dat").getPath();
-//		File dat = new File(path+File.separatorChar+args[0]);
-		File dat = new File(path+File.separatorChar+"small.dat");
+		File dat = new File(path+File.separatorChar+args[0]);
 		int[][] landScape = Input.loadFile(dat);
 		Landscape grid=new Landscape(landScape);
 

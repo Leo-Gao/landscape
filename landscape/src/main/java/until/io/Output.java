@@ -4,11 +4,8 @@ import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.text.DecimalFormat;
-import java.util.Map;
 
-import pojo.HarePopulation;
 import pojo.Population;
-import pojo.PumaPopulation;
 
 public class Output {
 	static DecimalFormat df = new DecimalFormat("00000");
@@ -16,10 +13,12 @@ public class Output {
 	static String path = System.getProperty("user.dir");
 
 	/**
-	 *  it will generate one ppm file according two arrays and the landscpae 
-	 * @param pumas
-	 * @param hares
-	 * @param T    current timestep 
+	 * in order to create ppm files with only one array  for puma or hare individually
+	 * @param animal   the population inside which densities, maxValue, grid are stored
+	 * @param species   identify the species of current animal to create correct file 
+	 * e.g.  puma /  hare
+	 * if it is only puma, then , produce only pictures for pumas
+	 * @param T   set the interval value  , read from property file
 	 */
 	public static void generateFile(Population animal,String species,int T){
 		
@@ -66,7 +65,12 @@ public class Output {
 		} 
 		
 	}
-
+	/**
+	 * in order to create ppm files with both of two arrays. 
+	 * @param pumas   the population of puma inside which densities, maxValue, grid are stored
+	 * @param hares   the population of puma inside which densities, maxValue, grid are stored
+	 * @param T   set the interval value  , read from property file
+	 */
 	public static void generateFileS(Population pumas,Population hares,int T){
 		
 		File outputDir = new File(path+File.separatorChar+"output");
@@ -100,7 +104,7 @@ public class Output {
 
 					double red = pumasData[i][j];// set red value using densities of pumas
 					double green = haresData[i][j];// set green value using densities of hares
-					double blue = 0d; // set blue value using status landScpae
+//					double blue = 0d; // set blue value using status landScpae
 					
 					String tmp = trans(red, maxPuma)+" "+ trans(green,maxHare)+" "+ 0;
 					
@@ -114,22 +118,16 @@ public class Output {
 		} 
 		
 	}
-
+	/**
+	 * according to the current density and maxValue to determine the percent
+	 * that way, ensure the corret number of color
+	 * @param d
+	 * @param max
+	 * @return 
+	 */
 	private static int trans(double d,double max) {
 		Double aa = (d/max)*25; 
 		return aa.intValue();
 	}
 	
-	public static void main(String[] args) {
-//		double[][] pumas = {{0,0,0,15},{0,0,0,0},{0,0,0,0},{15,0,0,0}};
-//		double[][] hares = {{0,0,0,0},{0,15,0,0},{0,0,15,0},{0,0,0,0}};
-//		double[][] landscape = {{0,0,0,15},{0,7,0,0},{0,0,7,0},{15,0,0,0}};
-		
-//		int T = 6;
-		
-//		generateFile(pumas, hares, T);
-		
-		
-		
-	}
 }

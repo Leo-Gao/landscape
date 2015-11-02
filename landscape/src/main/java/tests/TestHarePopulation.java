@@ -173,6 +173,13 @@ public class TestHarePopulation {
 		double newdensity= .5 + .1*(.2*.5 - .3*.5*.3 + .25*(.4+.4 - 2*.5));
 		assertEquals(hares.getDensity(0, 0), newdensity, .05);
 	}
-
-
+	
+	@Test
+	public void testGetMaxValue(){
+		Landscape testgrid=new Landscape(new int[][]{{1,1},{1,1}});
+		HarePopulation hares = new HarePopulation(testgrid);
+		hares.setDensities(new double[][]{{.1,.55},{.3,.4}});
+		double max = hares.getMaxValue();
+		assertEquals(.55, max,.000001);
+	}
 }
