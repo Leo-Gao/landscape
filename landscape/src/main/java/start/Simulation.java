@@ -18,7 +18,7 @@ public class Simulation {
 		
 		//load file  and init landscpae
 		String path = System.getProperty("user.dir");
-		File dat = new File(path+File.separatorChar+args[0]);
+		File dat = new File(path+File.separatorChar+"islands.dat");
 		int[][] landScape = Input.loadFile(dat);
 		Landscape grid=new Landscape(landScape);
 

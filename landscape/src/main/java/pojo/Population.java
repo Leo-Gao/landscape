@@ -56,7 +56,7 @@ public class Population {
 	 */
 	public Population(Landscape grid){
 		this.grid=grid;
-		initiateArrays(grid.getLandWidth(),grid.getLandHeight());
+		initiateArrays(grid.getLandHeight(),grid.getLandWidth());
 		setUniformDensity(0);
 	}
 	
@@ -68,7 +68,7 @@ public class Population {
 	 */
 	public Population(Landscape grid, double density) {
 		this.grid=grid;
-		initiateArrays(grid.getLandWidth(),grid.getLandHeight());
+		initiateArrays(grid.getLandHeight(),grid.getLandWidth());
 		setUniformDensity(density);
 	}
 
@@ -80,14 +80,14 @@ public class Population {
 	 */
 	public Population(Landscape grid, double[][] densityarray) {
 		this.grid=grid;
-		initiateArrays(grid.getLandWidth(),grid.getLandHeight());
+		initiateArrays(grid.getLandHeight(),grid.getLandWidth());
 		setDensities(densityarray);
 	}
 
 	
 	public Population(Population copy){
 		this.grid=copy.grid;
-		initiateArrays(grid.getLandWidth(),grid.getLandHeight());
+		initiateArrays(grid.getLandHeight(),grid.getLandWidth());
 		this.setDensities(copy.getDensities());
 		this.setBirthRate(copy.getBirthRate());
 		this.setDeathRate(copy.getDeathRate());
@@ -98,9 +98,9 @@ public class Population {
 	 * Called by constructors,
 	 * initiates arrays to correct sizes to match Landscape grid.
 	 */
-	private void initiateArrays(int width, int height) {
-		densities = new double[width][height];
-		initDensities = new double[width][height];
+	private void initiateArrays(int height, int width) {
+		densities = new double[height][width];
+		initDensities = new double[height][width];
 	}
 
 	
@@ -117,8 +117,8 @@ public class Population {
 		//save state at beginning of timestep
 		this.initDensities = densities;	
 		//evolve each square
-		for (int i=0; i < grid.getLandWidth(); i++){
-			for (int j=0; j < grid.getLandHeight(); j++){
+		for (int i=0; i < grid.getLandHeight(); i++){
+			for (int j=0; j < grid.getLandWidth(); j++){
 				 if (grid.isLand(i,j)){
 				timeStepSquare(i,j, dt,other_population.getDensity(i, j));
 				 }
@@ -237,9 +237,8 @@ public class Population {
 	 * @param density
 	 */
 	public void setUniformDensity(double density) {
-		//TODO i height ;  j weight
-		for (int i=0; i < grid.getLandWidth(); i++){
-			for (int j=0; j < grid.getLandHeight(); j++){
+		for (int i=0; i < grid.getLandHeight(); i++){
+			for (int j=0; j < grid.getLandWidth(); j++){
 				setDensity(i,j,density);
 			}
 		}
@@ -293,8 +292,8 @@ public class Population {
 	 */
 	public void setDensities(double[][] densities) {
 		//setting each element separately to check if each is on water square
-		for (int i=0; i < grid.getLandWidth(); i++){
-			for (int j=0; j < grid.getLandHeight(); j++){
+		for (int i=0; i < grid.getLandHeight(); i++){
+			for (int j=0; j < grid.getLandWidth(); j++){
 				setDensity(i,j,densities[i][j]);
 			}
 		}
@@ -307,8 +306,8 @@ public class Population {
 	public double getAvgDensityGrid(){
 		double square_count = 0;
 		double sum_density= 0;
-		for (int i=0; i < grid.getLandWidth(); i++){
-			for (int j=0; j < grid.getLandHeight(); j++){
+		for (int i=0; i < grid.getLandHeight(); i++){
+			for (int j=0; j < grid.getLandWidth(); j++){
 				sum_density += getDensity(i,j);
 				square_count += 1;
 			}
@@ -324,8 +323,8 @@ public class Population {
 	public double getAvgDensityLand(){
 		double square_count = 0;
 		double sum_density= 0;
-		for (int i=0; i < grid.getLandWidth(); i++){
-			for (int j=0; j < grid.getLandHeight(); j++){
+		for (int i=0; i < grid.getLandHeight(); i++){
+			for (int j=0; j < grid.getLandWidth(); j++){
 				if (grid.isLand(i,j)){
 				sum_density += getDensity(i,j);
 				square_count += 1;
@@ -338,8 +337,8 @@ public class Population {
 	
 	public void setRandomDensities(double max, long seed){
 		Random random = new Random(seed);
-		for (int i=0; i < grid.getLandWidth(); i++){
-			for (int j=0; j < grid.getLandHeight(); j++){
+		for (int i=0; i < grid.getLandHeight(); i++){
+			for (int j=0; j < grid.getLandWidth(); j++){
 				setDensity(i,j,random.nextDouble()*max);
 			}
 		}
@@ -361,8 +360,8 @@ public class Population {
 	public double getMaxValue(){
 		
 		Double max = 0d;
-		for (int i=0; i < grid.getLandWidth(); i++){
-			for (int j=0; j < grid.getLandHeight(); j++){
+		for (int i=0; i < grid.getLandHeight(); i++){
+			for (int j=0; j < grid.getLandWidth(); j++){
 				if (densities[i][j] > max) {
 					max = densities[i][j];
 				}
