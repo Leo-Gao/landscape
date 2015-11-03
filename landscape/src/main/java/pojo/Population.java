@@ -84,7 +84,10 @@ public class Population {
 		setDensities(densityarray);
 	}
 
-	
+	/**
+	 * Constructor makes new population as copy of given population
+	 * @param copy population to copy
+	 */
 	public Population(Population copy){
 		this.grid=copy.grid;
 		initiateArrays(grid.getLandHeight(),grid.getLandWidth());
@@ -222,7 +225,7 @@ public class Population {
 	 */
 	public void setDiffusionRate(double k) {
 		this.diffusionrate=k;
-	}
+		}
 	
 	/**
 	 * get diffusion rate
@@ -335,6 +338,11 @@ public class Population {
 		return avgdensity;
 	}
 	
+	/**
+	 * sets squares to random densities evenly distributed between 0 and max
+	 * @param max maximum density
+	 * @param seed long seed
+	 */
 	public void setRandomDensities(double max, long seed){
 		Random random = new Random(seed);
 		for (int i=0; i < grid.getLandHeight(); i++){
@@ -344,6 +352,21 @@ public class Population {
 		}
 	}
 	
+	
+	/**
+	 * sets squares to random densities evenly distributed between min and max
+	 * @param min minimum density
+	 * @param max maximum density
+	 * @param seed long seed
+	 */
+	public void setRandomDensities(double min, double max, long seed){
+		Random random = new Random(seed);
+		for (int i=0; i < grid.getLandHeight(); i++){
+			for (int j=0; j < grid.getLandWidth(); j++){
+				setDensity(i,j,min + random.nextDouble()*(max-min));
+			}
+		}
+	}
 		
 	/**
 	 * manually set array of densities at beginning of step.

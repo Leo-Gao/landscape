@@ -4,6 +4,8 @@ import model.Landscape;
 
 /**
  * entity of puma
+ * Same as Population superclass except for timestep equation
+ *  including interactions with prey population
  * @author Gaolu
  *
  */
@@ -22,11 +24,21 @@ public class PumaPopulation extends Population {
     	super(grid, densityarray);
     }
     
+    /**
+	 * Constructor makes new population as copy of given population
+	 * @param copy population to copy
+	 */
     public PumaPopulation(Population copy){
     	super(copy);
     }
 	
-
+    /**
+     * evolves square one step according to predator equation
+     * @param i index of square
+     * @param j index of square
+     * @param dt length of step
+     * @param haredensity density of prey population at this square
+     */
 	public void timeStepSquare(int i, int j, double dt, double haredensity) {
 		double old_density = initDensities[i][j];
 		
