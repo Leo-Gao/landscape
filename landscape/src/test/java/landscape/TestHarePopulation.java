@@ -1,4 +1,5 @@
-package tests;
+package landscape;
+
 
 import static org.junit.Assert.*;
 

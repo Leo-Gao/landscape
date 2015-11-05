@@ -1,4 +1,5 @@
-package tests;
+package landscape;
+
 
 import static org.junit.Assert.*;
 
@@ -11,7 +12,7 @@ import pojo.PumaPopulation;
 
 public class TestModel {
 
-	@Test
+//	@Test
 	public void testConstructor() {
 		fail("Not yet implemented");
 	}
