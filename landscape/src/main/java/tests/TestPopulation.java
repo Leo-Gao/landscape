@@ -8,7 +8,7 @@ import model.Landscape;
 import pojo.HarePopulation;
 import pojo.PumaPopulation;
 
-public class TestHarePopulation {
+public class TestPopulation {
 
 	
 	Landscape testlandscape = new Landscape(new int[][] {{1,1,1},{1,1,1},{1,1,1}});
@@ -148,7 +148,7 @@ public class TestHarePopulation {
 	}
 
 	@Test
-	public void testTimeStepSquare() {
+	public void testTimeStepSquareHares() {
 		Landscape testgrid=new Landscape(new int[][]{{1,1},{1,1}});
 		HarePopulation hares = new HarePopulation (testgrid);
 		hares.setDensities(new double[][]{{.5,.4},{.4,.2}});
@@ -160,6 +160,21 @@ public class TestHarePopulation {
 		double newdensity= .5 + .1*(.2*.5 - .3*.5*.3 + .25*(.4+.4 - 2*.5));
 		assertEquals(hares.getDensity(0, 0), newdensity, .05);
 	}
+	
+	@Test
+	public void testTimeStepSquarePumas() {
+		Landscape testgrid=new Landscape(new int[][]{{1,1},{1,1}});
+		PumaPopulation pumas = new PumaPopulation (testgrid);
+		pumas.setDensities(new double[][]{{.5,.4},{.4,.2}});
+		pumas.setInitDensitis(pumas.getDensities());
+		pumas.setBirthRate(.2);
+		pumas.setDeathRate(.3);
+		pumas.setDiffusionRate(.25);
+		pumas.timeStepSquare(0, 0, .1 ,.3);
+		double newdensity= .5 + .1*(.2*.5*.3 - .3*.5 + .25*(.4+.4 - 2*.5));
+		assertEquals(pumas.getDensity(0, 0), newdensity, .05);
+	}
+	
 	
 	@Test
 	public void testGetMaxValue(){

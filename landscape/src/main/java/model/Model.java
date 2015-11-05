@@ -51,6 +51,8 @@ public class Model {
 		//evolve referencing initial state of other population
 		pumas.timeStepAll(dt, hares_init);
 		hares.timeStepAll(dt, pumas_init);
+		
+		System.out.println(hares.getDensity(0,0));
 	}
 	
 }
