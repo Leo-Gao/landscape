@@ -5,7 +5,7 @@ package model;
  * 
  * Landscape class holds grid of water or land values
  * Includes halo of 0s in internal grid but
- * all public methods can be used withou considering halo
+ * all input and output is in unhaloed grid coordinates
  * 
  * @author jsk
  * 
@@ -96,7 +96,6 @@ public class Landscape {
 			this.grid[i+1][j+1]=false;
 		}
 		else { 
-			// TODO exception
 			System.out.println("bad value in landscape grid entered");		
 		}
 	}

@@ -42,10 +42,14 @@ public class HarePopulation extends Population {
 		super(grid,densityarray);
 	}
 
-	
+	/**
+	 * Constructor makes new population as copy of given population
+	 * @param copy population to copy
+	 */
 	public HarePopulation(Population copy){
 		super(copy);
 	}
+	
 	public void timeStepSquare(int i, int j, double dt, double pumadensity) {
 		//update population in square, referencing initDensities array
 		//for densities of neighboring squares

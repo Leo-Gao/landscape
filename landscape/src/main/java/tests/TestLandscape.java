@@ -21,10 +21,6 @@ public class TestLandscape {
 	
 	@Test
 	public void testConstructorArray() {
-		//i = down, j = side
-		//height = elements in subarray 
-		//width = number of arrays
-		//each subarray represents line
 		int[][] test_array_in = new int[][] {{0,1,1},{1,1,1},{0,0,1},{0,1,1}};
 		Landscape testlandscape = new Landscape(test_array_in);
 		assertEquals(testlandscape.getSquare(0,0), 0);
@@ -32,14 +28,6 @@ public class TestLandscape {
 		assertEquals(testlandscape.getSquare(2,1), 0);
 		}
 	
-	@Test
-	public void testConstructorArrayException() {
-		int[][] test_array_in = new int[][] {new int[]{0,1,1},new int[]{9,1,1},new int[]{0,0,1}};
-		Landscape testlandscape = new Landscape(test_array_in);
-		test_array_in = new int[][] {new int[]{0,1,1},new int[]{1,1,-1},new int[]{0,0,1}};
-		testlandscape = new Landscape(test_array_in);
-		fail("Not yet implemented");
-		}
 	
 	@Test
 	public void testSetLandscapeSize() {
@@ -54,14 +42,13 @@ public class TestLandscape {
 		assertEquals(testlandscape.getLandHeight(), 4);
 	}
 	
-	@Test
+	@Test(expected=ArrayIndexOutOfBoundsException.class)
 	public void testSetLandscapeSizeException() {
 		int width = 2;
 		int height = 5;
 		Landscape testlandscape = new Landscape(width, height);
 		int[][] test_array_in = new int[][] {{0,1,1},{1,1,1},{0,0,1}};
 		testlandscape.setLandscape(test_array_in);
-		fail("Not yet implemented");
 	}
 	
 	
@@ -74,12 +61,11 @@ public class TestLandscape {
 		assertEquals(testlandscape.countLand(3,1),0);
 	}
 	
-	@Test
+	@Test(expected=ArrayIndexOutOfBoundsException.class)
 	public void testCountLandIndexException() {
 		int[][] test_array_in = new int[][] {{0,1,1},{1,1,1},{0,0,1},{0,0,0}};
 		Landscape testlandscape = new Landscape(test_array_in);
 		int landcount = testlandscape.countLand(0,21);
-		fail("Not yet implemented");
 		landcount = testlandscape.countLand(-1,2);
 	}
 	
@@ -135,6 +121,7 @@ public class TestLandscape {
 		Landscape testlandscape = new Landscape(test_array_in);
 		assertEquals(testlandscape.isLand(0,0), false);
 		assertEquals(testlandscape.isLand(1,1), true);
+		assertEquals(testlandscape.isLand(0,-1), false);
 	}
 	
 	

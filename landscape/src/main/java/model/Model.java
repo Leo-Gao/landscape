@@ -4,10 +4,8 @@ import pojo.HarePopulation;
 import pojo.PumaPopulation;
 
 /**
- * Model object holds landscape, populations; 
- * executes one or multiple timesteps.
- * Maybe unnecessary and could be done in main method
- * Integrate file generation?
+ * Model object holds landscape, multiple populations; 
+ * evolves these over one or multiple timesteps.
  * 
  * @author jsk
  *

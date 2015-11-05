@@ -108,19 +108,6 @@ public class TestHarePopulation {
 		assertEquals(hares.getBirthRate(), 8.15, .0001);
 	}
 
-	@Test
-	public void testSetBirthRateException() {
-		HarePopulation hares = new HarePopulation(testlandscape, 12);
-		hares.setBirthRate(-.2);
-		fail("Not yet implemented");
-	}
-	
-	@Test
-	public void testSetDeathRateException() {
-		HarePopulation hares = new HarePopulation(testlandscape, 12);
-		hares.setDeathRate(-3701);
-		fail("Not yet implemented");
-	}
 	
 	@Test
 	public void testSetDeathRate() {
