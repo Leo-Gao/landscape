@@ -1,6 +1,6 @@
 # landscape
 
-using two build tool  :  maven , ant 
+using two build tools  :  maven , ant 
 
 1. build tool : maven --   command: mvn package
    execution commancd : java -classpath start.Simulation small.dat
@@ -8,12 +8,12 @@ using two build tool  :  maven , ant
    Note: run executable jar file , please work in target directory
 
 2. build tool:  ant  -- command : ant runSimulation
-   Note : executing 'ant' need to work in 'ant' directory
+   Note : work in 'ant' directory when executing 'ant' need to 
 
- if want change parameters, check and modify property.properties.
+ parameters can be changed by modifying property.properties.
 
 entrance class :  start.Simulation.java
 
-output directory of ppm file:  ./output
+output directory of ppm files:  ./output
 
-output of average data : command sceen 
+running output of average population densities : command sceen 
