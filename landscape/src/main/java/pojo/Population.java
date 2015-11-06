@@ -11,7 +11,7 @@ import model.Landscape;
  * Only method "timestep" needs to be overriden with 
  * specific equations for predator or prey.
  * 
- * @author jsk
+ * @author jklebes
  *
  */
 public class Population {

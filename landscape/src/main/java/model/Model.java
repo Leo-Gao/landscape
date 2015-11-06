@@ -7,7 +7,7 @@ import pojo.PumaPopulation;
  * Model object holds landscape, multiple populations; 
  * evolves these over one or multiple timesteps.
  * 
- * @author jsk
+ * @author jklebes
  *
  */
 

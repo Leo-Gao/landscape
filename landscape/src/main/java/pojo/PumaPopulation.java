@@ -6,7 +6,7 @@ import model.Landscape;
  * entity of puma
  * Same as Population superclass except for timestep equation
  *  including interactions with prey population
- * @author Gaolu
+ * @author jklebes
  *
  */
 public class PumaPopulation extends Population {

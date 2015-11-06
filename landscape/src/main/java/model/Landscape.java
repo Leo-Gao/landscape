@@ -7,7 +7,7 @@ package model;
  * Includes halo of 0s in internal grid but
  * all input and output is in unhaloed grid coordinates
  * 
- * @author jsk
+ * @author jklebes
  * 
  */
 public class Landscape {
